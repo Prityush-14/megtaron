@@ -1,0 +1,64 @@
+Starting Triton-Megatron integration test...
+Using CUDA device: NVIDIA GeForce RTX 3090
+Triton version: 3.2.0
+PyTorch version: 2.6.0+cu124
+Initialized distributed process group
+Initialized model parallel state
+
+========================================
+Testing with force_triton=False
+========================================
+Created TritonVectorAddModule with local weight shape: torch.Size([1024])
+Created test input with shape: torch.Size([2, 128, 1024])
+
+Testing basic vector addition...
+Basic vector addition test: max diff = 0.0
+✅ Basic test PASSED
+Forward pass completed in 0.15 ms
+Output shape: torch.Size([2, 128, 1024])
+Maximum difference between Triton and PyTorch: 0.0
+✅ Test PASSED: Triton and PyTorch results match
+
+Testing broadcasting capabilities...
+Scalar broadcasting completed in 0.03 ms
+Maximum difference for scalar broadcasting: 0.0
+✅ Scalar broadcasting test PASSED
+Testing vector broadcasting with shape torch.Size([1024]) to torch.Size([2, 128, 1024])
+Vector broadcasting completed in 0.02 ms
+Maximum difference for vector broadcasting: 0.0
+✅ Vector broadcasting test PASSED
+
+Testing with larger batch size...
+Forward pass with batch size 16 completed in 0.05 ms
+
+========================================
+Testing with force_triton=True
+========================================
+Created TritonVectorAddModule with local weight shape: torch.Size([1024])
+Created test input with shape: torch.Size([2, 128, 1024])
+
+Testing basic vector addition...
+Basic vector addition test: max diff = 0.0
+✅ Basic test PASSED
+Forward pass completed in 6.17 ms
+Output shape: torch.Size([2, 128, 1024])
+Maximum difference between Triton and PyTorch: 0.0
+✅ Test PASSED: Triton and PyTorch results match
+
+Testing broadcasting capabilities...
+Scalar broadcasting completed in 0.09 ms
+Maximum difference for scalar broadcasting: 0.0
+✅ Scalar broadcasting test PASSED
+Testing vector broadcasting with shape torch.Size([1024]) to torch.Size([2, 128, 1024])
+Vector broadcasting completed in 0.06 ms
+Maximum difference for vector broadcasting: 0.0
+✅ Vector broadcasting test PASSED
+
+Testing with larger batch size...
+Forward pass with batch size 16 completed in 0.13 ms
+
+Testing checkpoint capability...
+Successfully created sharded state dict with keys: ['weight', 'bias']
+
+Triton-Megatron integration test completed!
+Destroyed distributed process group

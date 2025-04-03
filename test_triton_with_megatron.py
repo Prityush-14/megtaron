@@ -60,7 +60,7 @@ def triton_vector_add(x, y, force_triton=False):
         n_elements = x_flat.numel()
         output = torch.empty_like(x_flat)
         
-        BLOCK_SIZE = 128  # Smaller block size for better stability
+        BLOCK_SIZE = 512  # Smaller block size for better stability
         grid = (n_elements + BLOCK_SIZE - 1) // BLOCK_SIZE
         
         vector_add_kernel[(grid,)](
